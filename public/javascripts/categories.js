@@ -54,7 +54,7 @@ $('.ajax-update').on('click', function(e){
 $('.ajax-del').on('click', function(e){
 	e.preventDefault();
 	const id = $(this).data('id');
-	const check = confirm(`確定要刪除分類「${$(this).data('title')}」? \n(原分類文章分類至「未分類)`);
+	const check = confirm(`確定要刪除分類「${$(this).data('title')}」? \n(原分類文章將分類至「未分類」)`);
 	if(check){
 		$.ajax({
 			url: '/dashboard/categories/delete/' + id,
