@@ -1,0 +1,85 @@
+<% extend('../layout/layout-dashboard') %>
+<%- include('../partials/dashboard_nav') %>
+<style>
+	small{
+		display: inline-block;
+		line-height: 1.2;
+		color: red;
+	}
+	.ani{
+		animation: ani .2s linear 3 forwards;
+		
+	}
+	@keyframes ani{
+		33%{transform: translateX(5px)}
+		66%{transform: translateX(-5px)}
+		100%{transform: translateX(0)}
+	}
+</style>
+<div class="main container-fluid my-4">
+	
+	<div class="row justify-content-center">
+		<div class="col-md-6">
+			<% if(hasInfo){ %>
+				<div class="alert alert-success">
+					<%= info %>
+				</div>
+			<% } %>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>名稱</th>
+						<th>路徑</th>
+						<th width="30"></th>
+					</tr>
+				</thead>
+				<tbody>
+				<% for(var i in categoriesDef){ %>
+					<tr>
+						<td class="align-middle"><%= categoriesDef[i].name %></td>
+						<td colspan='3'><%= categoriesDef[i].path %></td>
+					</tr>
+				<% } %>
+				<% for(var key in categories){ %>
+					<tr>
+						<td class="align-middle"><%= categories[key].name %></td>
+						<td class="path-input">
+							<input type="text" class="form-control form-control-sm path-input-input" value="<%= categories[key].path %>">
+							<small></small>
+						</td>
+						<td class="align-middle">
+							<a href="#" class="btn btn-outline-danger btn-sm ajax-update" data-path='<%= categories[key].path %>' data-id="<%= categories[key].id %>">修改路徑</a>
+						</td>
+						<td class="align-middle">
+							<a href="#" class="btn btn-outline-danger btn-sm ajax-del" data-title='<%= categories[key].name %>' data-id="<%= categories[key].id %>">刪除</a>
+						</td>
+					</tr>
+				<% } %>
+				</tbody>
+			</table>
+
+
+			<form method="POST" action="/dashboard/categories/create">
+				<table class="table">
+					<tr>
+						<td class="align-middle">新增</td>
+						<td>
+							<label for="name">分類名稱</label>
+							<input type="text" class="form-control" id="name" name="name" placeholder="請輸入分類名稱">
+						</td>
+						<td colspan="2">
+							<label for="path">路徑</label>
+							<input type="text" class="form-control" id="path" name="path" placeholder="請輸入分類路徑">
+							<small></small>
+						</td>
+					</tr>
+				</table>
+				<div class="text-right">
+					<button type="submit" class="btn btn-primary" id="testPath">新增分類</button>
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>
+<script src='javascripts/categories.js'></script>

@@ -1,0 +1,48 @@
+<% extend('layout/layout') %>
+<%- include('partials/nav') %>
+<div class="container">
+	<div class="hex-blog">
+		<nav class="breadcrumb pl-0">
+			<a class="breadcrumb-item text-primary" href="/forum">Home</a>
+			<a class="breadcrumb-item text-primary" href="/forum/<%= categories[articles.category].path %>">
+				<%= categories[articles.category].name %>
+			</a>
+			<span class="breadcrumb-item active"><%= articles.title %></span>
+		</nav>
+		<div class="row justify-content-center">
+			<div class="col-md-9">
+				<!-- artical header -->
+				<h1 class="text-primary"><%= articles.title %></h1>
+				<div class="d-flex flex-row text-secondary small">
+					<div class="p-2"><i class="fa fa-user-o" aria-hidden="true"></i> Eason</div>
+					<div class="p-2"><%= moment(articles.update_time).format('YYYY-MM-DD / hh : mm') %></div>
+					<div class="p-2"><i class="fa fa-tag" aria-hidden="true"></i>
+						<a href="/forum/<%= categories[articles.category].path %>" class="text-info">
+							<%= categories[articles.category].name %>
+						</a>
+					</div>
+				</div>
+				<article class="text-dark post mb-4">
+					<%- articles.content %>
+				</article>
+				<!-- 留言 -->
+				<div class="card mb-3">
+					<div class="card-body">
+						<div id="disqus_thread"></div>
+							<script>
+								(function() {
+								var d = document, s = d.createElement('script');
+								s.src = 'https://eason-disqus.disqus.com/embed.js';
+								s.setAttribute('data-timestamp', +new Date());
+								(d.head || d.body).appendChild(s);
+								})();
+							</script>
+							<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+</div>

@@ -1,0 +1,45 @@
+<% extend('layout/layout') %>
+<%- include('partials/nav') %>
+<%
+	// if(hasInfo = undefined){
+	// 	const hasInfo = false;
+	// }
+%>
+<div class="container">
+	<div class="row my-4 justify-content-center">
+		
+		<div class="col-md-9">
+			<% if(hasInfo){ %>
+				<div class='alert alert-warning'>
+					<%= info %>
+				</div>
+			<% } %>
+			<% for(var item in articles){ %>
+			<div class="card mb-3">
+				<div class="card-body">
+					<a href="/forum/<%= categories[articles[item].category].path %>/<%= articles[item].id %>">
+						<h2 class="text-primary"><%= articles[item].title %></h2>
+					</a>
+					<div class="d-flex flex-row text-secondary small">
+						<div class="p-2"><span class="fa fa-clock-o"></span> <%= moment(articles[item].update_time).format('YYYY-MM-DD / hh : mm') %></div>
+						<div class="p-2"><i class="fa fa-tag" aria-hidden="true"></i>
+							<a href="/forum/<%= categories[articles[item].category].path %>" class="text-info">
+								<%= categories[articles[item].category].name %>
+							</a>
+						</div>
+					</div>
+					<div>
+						<%- striptags(articles[item].content).slice(0, 150) %>...
+					</div>
+				</div>
+			</div>
+			<% } %>
+		</div>
+	</div>
+
+	<%- include('partials/pagenation') %>
+</div>
+
+<script>
+	slideUp($('.alert'));
+</script>

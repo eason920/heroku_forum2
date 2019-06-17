@@ -1,0 +1,13 @@
+<% extend('../layout/layout-dashboard') %>
+<%
+	if(auth = undefined){
+		const auth = false;
+	}
+	if(nav = undefined){
+		const nav = '';
+	}
+%>
+<%- include('../partials/dashboard_nav') %>
+<div class="main container-fluid my-4">
+	<h1><%= title %></h1>
+</div>

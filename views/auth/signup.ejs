@@ -1,0 +1,49 @@
+<% extend('../layout/layout-dashboard') %>
+<%- include('../partials/dashboard_nav') %>
+<div class="main container-fluid my-4">
+
+
+	<div class="row justify-content-center">
+		<div class="col-sm-6">
+			<% if(hasInfo){ %>
+				<div class='alert alert-warning'>
+					<%= info %>
+				</div>
+			<% } %>
+			<form method="POST" action="/auth/signup" id="authForm">
+				<input type="hidden" name="_csrf" value="<%= csrfToken %>">
+				<div class="form-group">
+					<label for="exampleInputEmail1">Email</label>
+					<input type="email" class="form-control" id="email" name="email"
+						aria-describedby="emailHelp" placeholder="請輸入 email" required>
+					<small id='infoEmail' style='color: red;'></small>
+					<small id="emailHelp" class="form-text text-muted">我們不會隨意散佈你的 Email</small>
+				</div>
+				<div class="form-group">
+					<label for="password">密碼</label>
+					<input type="password" class="form-control" id="password" name="password" placeholder="請輸入密碼"
+						required>
+					<small id='infoTarget' style='color: #f00;'></small>
+				</div>
+				<div class="form-group">
+					<label for="confirm_password">確認密碼</label>
+					<input type="password" class="form-control" id="confirm_password" name="confirm_password"
+						placeholder="確認密碼" required>
+					<small id='infoPassword' style='color: #f00;'></small>
+				</div>
+				<div class="form-check">
+					<input type="checkbox" class="form-check-input" id="confirm" required>
+					<label class="form-check-label" for="confirm" style="display: block">確認您了解這是 徐琮偉 Eason 的做品集</label>
+					<small id='infoCheck' style='color: #f00;'></small>
+				</div>
+				<a href="/auth/login" class="btn btn-secondary mt-3" style="float: left">己有帳號? 點此登入</a>
+				<div class="text-right mt-3">
+					<button type="submit" id="submit" class="btn btn-primary">註冊</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+</div>
+<script src="javascripts/signup.js"></script>

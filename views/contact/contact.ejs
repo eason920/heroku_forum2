@@ -1,0 +1,26 @@
+<% extend('../layout/layout') %>
+<%- include('../partials/nav') %>
+<div class="container">
+	<div class="row my-4 justify-content-center">
+		<div class="col-md-5">
+			<form action="/contact" method="post">
+				<h1>與我聯擊</h1>
+				<h6>您好：感謝你的來訪，若有意願與我聯繫，歡迎在此留下您的留言 !</h6>
+				<div class='container-fluid'>
+					<div class='row my-3'>
+						<label class= 'col-12 col-md-3 pl-0' for="title">標　　題：</label>
+						<input class= 'col-12 col-md-9' type="text" name="title" id="title"/>
+					</div>
+					<div class='row mb-3'>
+						<label class= 'col-12 col-md-3 pl-0' for="description" style='vertical-align: top;'>訊息內容：</label>
+						<textarea class= 'col-12 col-md-9' name="description" id="description" rows="5"></textarea>
+					</div>
+					<div>
+						<input class='btn btn-primary' style='float: right;' type="submit" value="送出訊息" />
+					</div>	
+				</div>
+				
+			</form>
+		</div>
+	</div>
+</div>

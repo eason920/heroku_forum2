@@ -1,0 +1,70 @@
+<% extend('../layout/layout-dashboard') %>
+<%- include('../partials/dashboard_nav') %>
+<div class="main container-fluid my-4">
+	<%
+		if(articles === null){
+			var articles = {}
+		}
+	%>
+	<form
+		<% if(articles.id){ %>
+			action="/dashboard/article/update/<%= articles.id %>"
+		<% }else{ %>
+			action="/dashboard/article/create"
+		<% } %>
+		method="POST"
+		class="row justify-content-center">
+		<div class="col-md-6">
+			<label for="title">請輸入標題</label>
+			<input type="text" id="title" class="form-control" name="title" placeholder="標題" value="<%= articles.title || '' %>">
+			<hr>
+			<textarea name="content" id="editor" class="form-control">
+				<%= articles.content || '' %>
+			</textarea>
+			<script>
+				CKEDITOR.replace('content');
+			</script>
+		</div>
+		<div class="col-md-3">
+
+			<div class="card mb-3">
+				<h6 class="card-header">分類</h6>
+				<div class="card-body">
+					<% for(var key in categories){ %>
+					<div class="form-check">
+						<label class="form-check-label">
+							<input class="form-check-input" type="radio" name="category" required
+								value="<%= categories[key].id %>" <% if(key === articles.category){ %>checked<% } %>>
+							<%= categories[key].name %>
+						</label>
+					</div>
+					<% } %>
+				</div>
+			</div>
+
+			<div class="card mb-3">
+				<h6 class="card-header">是否公開</h6>
+				<div class="card-body">
+					<div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+						<label class="btn btn-outline-primary w-100 <% if(articles.status === 'draft'){ %>active<% } %>">
+							<input type="radio" name="status" autocomplete="off" value="draft" <% if(articles.status === 'draft'){ %>checked<% } %>> 草稿
+						</label>
+						<label class="btn btn-outline-primary w-100 <% if(articles.status === 'public'){ %>active<% } %>">
+							<input type="radio" name="status" autocomplete="off" value="public" <% if(articles.status === 'public'){ %>checked<% } %>> 公開
+						</label>
+					</div>
+				</div>
+			</div>
+
+			<div class="btn-group w-100">
+				<button type="submit" class="btn btn-outline-primary w-100">
+					<% if(articles.id){ %>
+						更新
+					<% }else{ %>
+						建立新文章
+					<% } %>
+				</button>
+			</div>
+		</div>
+	</form>
+</div>

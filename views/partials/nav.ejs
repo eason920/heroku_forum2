@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #00cc99;">
+	<a class="navbar-brand mr-2" href="/forum">
+		<i class="fa fa-diamond" aria-hidden="true"></i>
+		徐琮偉 Eason 部落格
+	</a>
+	<a class="navbar-brand" href="/contact">
+		| 與我聯擊
+	</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+		aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+		<div class="navbar-nav ml-auto">
+			<a class="nav-item nav-link <% if(cid === 'all'){ %>active<% } %>" href="/forum">全部文章</a>
+			<% for(var item in categories){ %>
+				<a class="nav-item nav-link <% if(categories[item].id === cid){ %>active<% } %>" href="/forum/<%= categories[item].path %>"><%= categories[item].name %></a>
+			<% } %>
+		</div>
+	</div>
+</nav>
